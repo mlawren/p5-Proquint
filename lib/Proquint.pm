@@ -30,14 +30,14 @@ sub _uint16_to_chunk {
     my $in  = shift // Carp::croak 'usage: _uint16_to_chunk($INTEGER)';
     my $out = '';
 
-    foreach my $i ( 0 .. $CHARS_PER_CHUNK - 1 ) {
+    foreach my $i ( 1 .. $CHARS_PER_CHUNK ) {
         if ( $i & 1 ) {
-            $out .= $UINT2VOWEL[ $in & $MASK_LAST2 ];
-            $in >>= 2;
-        }
-        else {
             $out .= $UINT2CONSONANT[ $in & $MASK_LAST4 ];
             $in >>= 4;
+        }
+        else {
+            $out .= $UINT2VOWEL[ $in & $MASK_LAST2 ];
+            $in >>= 2;
         }
     }
     scalar reverse $out;
