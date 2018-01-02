@@ -4,10 +4,10 @@ use warnings;
 use Carp ();
 use Exporter::Tiny;
 
-our $VERSION = '0.01';
-our @ISA = 'Exporter::Tiny';
-our @EXPORT_OK = (qw/uint32quint quint32uint hex2quint quint2hex/);
-our @EXPORT_TAGS = (all => \@EXPORT_OK);
+our $VERSION     = '0.01';
+our @ISA         = 'Exporter::Tiny';
+our @EXPORT_OK   = (qw/uint32quint quint32uint hex2quint quint2hex/);
+our @EXPORT_TAGS = ( all => \@EXPORT_OK );
 
 my @UINT2CONSONANT  = (qw/ b d f g h j k l m n p r s t v z /);
 my @UINT2VOWEL      = (qw/ a i o u /);
