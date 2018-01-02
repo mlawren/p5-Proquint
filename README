@@ -14,7 +14,7 @@ SYNOPSIS
         my $hex    = quint2hex($quint2);        # "dead1234beef"
 
 DESCRIPTION
-    <https://arxiv.org/html/0901.4016|Proquints> are readable, spellable,
+    Proquints <https://arxiv.org/html/0901.4016> are readable, spellable,
     and pronounceable identifiers. The Proquints module converts 32-bit
     integers and hexadecimal strings to and from proquints.
 

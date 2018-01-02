@@ -148,7 +148,7 @@ Proquint - convert to and from proquint strings
 
 =head1 DESCRIPTION
 
-L<https://arxiv.org/html/0901.4016|Proquints> are readable, spellable,
+L<Proquints|https://arxiv.org/html/0901.4016> are readable, spellable,
 and pronounceable identifiers. The B<Proquints> module converts 32-bit
 integers and hexadecimal strings to and from proquints.
 
