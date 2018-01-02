@@ -9,21 +9,21 @@ our @ISA         = 'Exporter::Tiny';
 our @EXPORT_OK   = (qw/uint32quint quint32uint hex2quint quint2hex/);
 our @EXPORT_TAGS = ( all => \@EXPORT_OK );
 
-my @UINT2CONSONANT  = (qw/ b d f g h j k l m n p r s t v z /);
-my @UINT2VOWEL      = (qw/ a i o u /);
-my $CHARS_PER_CHUNK = 5;
-my $MASK_LAST2      = 0x3;
-my $MASK_LAST4      = 0xF;
-my $SEPARATOR       = '-';
+my @UINT_TO_CONSONANT = (qw/ b d f g h j k l m n p r s t v z /);
+my @UINT_TO_VOWEL     = (qw/ a i o u /);
+my $CHARS_PER_CHUNK   = 5;
+my $MASK_LAST2        = 0x3;
+my $MASK_LAST4        = 0xF;
+my $SEPARATOR         = '-';
 
-my %CONSONANT2UINT = do {
+my %CONSONANT_TO_UINT = do {
     my $i = 0;
-    map { $_ => $i++ } @UINT2CONSONANT;
+    map { $_ => $i++ } @UINT_TO_CONSONANT;
 };
 
-my %VOWEL2UINT = do {
+my %VOWEL_TO_UINT = do {
     my $i = 0;
-    map { $_ => $i++ } @UINT2VOWEL;
+    map { $_ => $i++ } @UINT_TO_VOWEL;
 };
 
 sub _uint16_to_chunk {
@@ -32,11 +32,11 @@ sub _uint16_to_chunk {
 
     foreach my $i ( 1 .. $CHARS_PER_CHUNK ) {
         if ( $i & 1 ) {
-            $out .= $UINT2CONSONANT[ $in & $MASK_LAST4 ];
+            $out .= $UINT_TO_CONSONANT[ $in & $MASK_LAST4 ];
             $in >>= 4;
         }
         else {
-            $out .= $UINT2VOWEL[ $in & $MASK_LAST2 ];
+            $out .= $UINT_TO_VOWEL[ $in & $MASK_LAST2 ];
             $in >>= 2;
         }
     }
@@ -61,13 +61,13 @@ sub _chunk_to_uint16 {
 
     my $res = 0;
     foreach my $c ( split //, $in ) {
-        if ( exists $CONSONANT2UINT{$c} ) {
+        if ( exists $CONSONANT_TO_UINT{$c} ) {
             $res <<= 4;
-            $res += $CONSONANT2UINT{$c};
+            $res += $CONSONANT_TO_UINT{$c};
         }
-        elsif ( exists $VOWEL2UINT{$c} ) {
+        elsif ( exists $VOWEL_TO_UINT{$c} ) {
             $res <<= 2;
-            $res += $VOWEL2UINT{$c};
+            $res += $VOWEL_TO_UINT{$c};
         }
         else {
             Carp::croak 'invalid quint char: ' . $c;
