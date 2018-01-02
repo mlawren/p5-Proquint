@@ -2,8 +2,12 @@ package Proquint;
 use strict;
 use warnings;
 use Carp ();
+use Exporter::Tiny;
 
 our $VERSION = '0.01';
+our @ISA = 'Exporter::Tiny';
+our @EXPORT_OK = (qw/uint32quint quint32uint hexstr2quint quint2hexstr/);
+our @EXPORT_TAGS = (all => \@EXPORT_OK);
 
 my @UINT2CONSONANT  = (qw/ b d f g h j k l m n p r s t v z /);
 my @UINT2VOWEL      = (qw/ a i o u /);
@@ -130,7 +134,7 @@ Proquint - convert to and from proquint strings
 
 =head1 SYNOPSIS
 
-    use Proquint 'uint32quint';
+    use Proquint ':all';
 
     my $quint = uint32quint(0xCF000001);    # "lusab-babad"
     my $int   = quint32uint($quint);        # 0xCF000001
