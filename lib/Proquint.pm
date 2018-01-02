@@ -139,6 +139,9 @@ Proquint - convert to and from proquint strings
     my $quint = uint32quint(0xCF000001);    # "lusab-babad"
     my $int   = quint32uint($quint);        # 0xCF000001
 
+    my $quint2 = hex2quint("dead1234beef"); # "tupot-damuh-ruroz"
+    my $hex    = quint2hex($quint2);        # "dead1234beef"
+
 =head1 DESCRIPTION
 
 L<https://arxiv.org/html/0901.4016|Proquints> are readable, spellable,
