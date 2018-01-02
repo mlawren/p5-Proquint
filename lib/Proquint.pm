@@ -6,7 +6,7 @@ use Exporter::Tiny;
 
 our $VERSION = '0.01';
 our @ISA = 'Exporter::Tiny';
-our @EXPORT_OK = (qw/uint32quint quint32uint hexstr2quint quint2hexstr/);
+our @EXPORT_OK = (qw/uint32quint quint32uint hex2quint quint2hex/);
 our @EXPORT_TAGS = (all => \@EXPORT_OK);
 
 my @UINT2CONSONANT  = (qw/ b d f g h j k l m n p r s t v z /);
@@ -95,8 +95,8 @@ sub quint32uint {
     $out;
 }
 
-# hexstr2quint('7f00001') eq 'lusab-babad'
-sub hexstr2quint {
+# hex2quint('7f00001') eq 'lusab-babad'
+sub hex2quint {
     my $in  = shift // Carp::croak 'usage: hex2quint($HEXIDECIMAL)';
     my $sep = shift // $SEPARATOR;
 
@@ -109,8 +109,8 @@ sub hexstr2quint {
         map { _uint16_to_chunk( hex( '0x' . $_ ) ) } $in =~ m/(.{4})/g );
 }
 
-# quint2hexstr('lusab-babad') eq '7f000001';
-sub quint2hexstr {
+# quint2hex('lusab-babad') eq '7f000001';
+sub quint2hex {
     my $in  = shift // Carp::croak 'usage: quint2hex($QUINT)';
     my $sep = shift // $SEPARATOR;
 

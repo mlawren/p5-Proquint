@@ -9,7 +9,7 @@ my $quint = 'lusab-babad';
 is uint32quint($int),   $quint, 'uint32quint';
 is quint32uint($quint), $int,   'quint32uint';
 
-is hexstr2quint($hex),   $quint, 'hexstr2quint';
-is quint2hexstr($quint), $hex,   'quint2hexstr';
+is hex2quint($hex),   $quint, 'hex2quint';
+is quint2hex($quint), $hex,   'quint2hex';
 
 done_testing();
