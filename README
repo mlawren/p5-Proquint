@@ -2,7 +2,7 @@ NAME
     Proquint - convert to and from proquint strings
 
 SYNOPSIS
-        use Proquint 'uint32quint';
+        use Proquint ':all';
 
         my $quint = uint32quint(0xCF000001);    # "lusab-babad"
         my $int   = quint32uint($quint);        # 0xCF000001
