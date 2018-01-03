@@ -16,7 +16,7 @@
         - None.
 
     Packaging:
-        - None.
+        - Add missing Test2::V0 dependency
 
 0.002 (2018-01-03)
 

@@ -11,7 +11,7 @@ on configure => sub {
 };
 
 on test => sub {
-    requires 'Test::More', '0.88';
+    requires 'Test2::V0';
 };
 
 # vim: ft=perl
