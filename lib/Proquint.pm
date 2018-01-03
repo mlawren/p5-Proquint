@@ -4,48 +4,48 @@ use warnings;
 use Carp ();
 use Exporter::Tiny;
 
-our $VERSION     = '0.001';
-our @ISA         = 'Exporter::Tiny';
-our @EXPORT_OK   = (qw/uint32quint quint32uint hex2quint quint2hex/);
+our $VERSION   = '0.002';
+our @ISA       = 'Exporter::Tiny';
+our @EXPORT_OK = (qw/uint32proquint proquint32uint hex2proquint proquint2hex/);
 our @EXPORT_TAGS = ( all => \@EXPORT_OK );
 
-my @UINT2CONSONANT  = (qw/ b d f g h j k l m n p r s t v z /);
-my @UINT2VOWEL      = (qw/ a i o u /);
-my $CHARS_PER_CHUNK = 5;
-my $MASK_LAST2      = 0x3;
-my $MASK_LAST4      = 0xF;
-my $SEPARATOR       = '-';
+my @UINT_TO_CONSONANT = (qw/ b d f g h j k l m n p r s t v z /);
+my @UINT_TO_VOWEL     = (qw/ a i o u /);
+my $CHARS_PER_CHUNK   = 5;
+my $MASK_LAST2        = 0x3;
+my $MASK_LAST4        = 0xF;
+my $SEPARATOR         = '-';
 
-my %CONSONANT2UINT = do {
+my %CONSONANT_TO_UINT = do {
     my $i = 0;
-    map { $_ => $i++ } @UINT2CONSONANT;
+    map { $_ => $i++ } @UINT_TO_CONSONANT;
 };
 
-my %VOWEL2UINT = do {
+my %VOWEL_TO_UINT = do {
     my $i = 0;
-    map { $_ => $i++ } @UINT2VOWEL;
+    map { $_ => $i++ } @UINT_TO_VOWEL;
 };
 
 sub _uint16_to_chunk {
     my $in  = shift // Carp::croak 'usage: _uint16_to_chunk($INTEGER)';
     my $out = '';
 
-    foreach my $i ( 0 .. $CHARS_PER_CHUNK - 1 ) {
+    foreach my $i ( 1 .. $CHARS_PER_CHUNK ) {
         if ( $i & 1 ) {
-            $out .= $UINT2VOWEL[ $in & $MASK_LAST2 ];
-            $in >>= 2;
+            $out .= $UINT_TO_CONSONANT[ $in & $MASK_LAST4 ];
+            $in >>= 4;
         }
         else {
-            $out .= $UINT2CONSONANT[ $in & $MASK_LAST4 ];
-            $in >>= 4;
+            $out .= $UINT_TO_VOWEL[ $in & $MASK_LAST2 ];
+            $in >>= 2;
         }
     }
     scalar reverse $out;
 }
 
-# uint32quint(0x7f000001) eq 'lusab-babad';
-sub uint32quint {
-    my $in  = shift // Carp::croak 'usage: uint32quint($INTEGER)';
+# uint32proquint(0x7f000001) eq 'lusab-babad';
+sub uint32proquint {
+    my $in  = shift // Carp::croak 'usage: uint32proquint($INTEGER)';
     my $sep = shift // $SEPARATOR;
 
     Carp::croak('input out of range 0-0xFFFFFFFF')
@@ -61,13 +61,13 @@ sub _chunk_to_uint16 {
 
     my $res = 0;
     foreach my $c ( split //, $in ) {
-        if ( exists $CONSONANT2UINT{$c} ) {
+        if ( exists $CONSONANT_TO_UINT{$c} ) {
             $res <<= 4;
-            $res += $CONSONANT2UINT{$c};
+            $res += $CONSONANT_TO_UINT{$c};
         }
-        elsif ( exists $VOWEL2UINT{$c} ) {
+        elsif ( exists $VOWEL_TO_UINT{$c} ) {
             $res <<= 2;
-            $res += $VOWEL2UINT{$c};
+            $res += $VOWEL_TO_UINT{$c};
         }
         else {
             Carp::croak 'invalid quint char: ' . $c;
@@ -77,9 +77,9 @@ sub _chunk_to_uint16 {
     $res;
 }
 
-# quint32uint('lusab-babad') == 0x7f000001;
-sub quint32uint {
-    my $in  = shift // Carp::croak 'usage: quint32uint($QUINT)';
+# proquint32uint('lusab-babad') == 0x7f000001;
+sub proquint32uint {
+    my $in  = shift // Carp::croak 'usage: proquint32uint($QUINT)';
     my $sep = shift // $SEPARATOR;
 
     $in =~ s/$sep//g;
@@ -95,9 +95,9 @@ sub quint32uint {
     $out;
 }
 
-# hex2quint('7f00001') eq 'lusab-babad'
-sub hex2quint {
-    my $in  = shift // Carp::croak 'usage: hex2quint($HEXIDECIMAL)';
+# hex2proquint('7f00001') eq 'lusab-babad'
+sub hex2proquint {
+    my $in  = shift // Carp::croak 'usage: hex2proquint($HEXIDECIMAL)';
     my $sep = shift // $SEPARATOR;
 
     $in =~ s/^0[xX]//;
@@ -109,9 +109,9 @@ sub hex2quint {
         map { _uint16_to_chunk( hex( '0x' . $_ ) ) } $in =~ m/(.{4})/g );
 }
 
-# quint2hex('lusab-babad') eq '7f000001';
-sub quint2hex {
-    my $in  = shift // Carp::croak 'usage: quint2hex($QUINT)';
+# proquint2hex('lusab-babad') eq '7f000001';
+sub proquint2hex {
+    my $in  = shift // Carp::croak 'usage: proquint2hex($QUINT)';
     my $sep = shift // $SEPARATOR;
 
     $in =~ s/$sep//g;
@@ -134,21 +134,21 @@ Proquint - convert to and from proquint strings
 
 =head1 VERSION
 
-0.001 (2018-01-02)
+0.002 (2018-01-03)
 
 =head1 SYNOPSIS
 
     use Proquint ':all';
 
-    my $quint = uint32quint(0xCF000001);    # "lusab-babad"
-    my $int   = quint32uint($quint);        # 0xCF000001
+    my $quint = uint32proquint(0xCF000001);    # "lusab-babad"
+    my $int   = proquint32uint($quint);        # 0xCF000001
 
-    my $quint2 = hex2quint("dead1234beef"); # "tupot-damuh-ruroz"
-    my $hex    = quint2hex($quint2);        # "dead1234beef"
+    my $quint2 = hex2proquint("dead1234beef"); # "tupot-damuh-ruroz"
+    my $hex    = proquint2hex($quint2);        # "dead1234beef"
 
 =head1 DESCRIPTION
 
-L<https://arxiv.org/html/0901.4016|Proquints> are readable, spellable,
+L<Proquints|https://arxiv.org/html/0901.4016> are readable, spellable,
 and pronounceable identifiers. The B<Proquints> module converts 32-bit
 integers and hexadecimal strings to and from proquints.
 

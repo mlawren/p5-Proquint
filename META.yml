@@ -27,4 +27,4 @@ requires:
   warnings: '0'
 resources:
   repository: https://github.com/mlawren/p5-Proquint
-version: '0.001'
+version: '0.002'
