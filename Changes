@@ -1,22 +1,13 @@
-0.002 (yyyy-mm-dd)
+0.002 (2018-01-03)
 
     API / Behaviour Changes:
         - Function names expanded to include full "proquint"
-
-    New Features:
-        - None.
 
     Enhancements:
         - Minor code clarity improvements
 
     Bug Fixes:
         - Fix up link to original Proquint paper
-
-    Dependencies:
-        - None.
-
-    Packaging:
-        - None.
 
 0.001 (2018-01-02)
 
