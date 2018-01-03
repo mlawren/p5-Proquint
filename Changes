@@ -1,19 +1,4 @@
-0.003 (yyyy-mm-dd)
-
-    API / Behaviour Changes:
-        - None.
-
-    New Features:
-        - None.
-
-    Enhancements:
-        - None.
-
-    Bug Fixes:
-        - None.
-
-    Dependencies:
-        - None.
+0.003 (2018-01-03)
 
     Packaging:
         - Add missing Test2::V0 dependency
