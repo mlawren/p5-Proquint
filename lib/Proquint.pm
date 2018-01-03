@@ -4,9 +4,9 @@ use warnings;
 use Carp ();
 use Exporter::Tiny;
 
-our $VERSION     = '0.002';
-our @ISA         = 'Exporter::Tiny';
-our @EXPORT_OK   = (qw/uint32quint quint32uint hex2quint quint2hex/);
+our $VERSION   = '0.002';
+our @ISA       = 'Exporter::Tiny';
+our @EXPORT_OK = (qw/uint32proquint proquint32uint hex2proquint proquint2hex/);
 our @EXPORT_TAGS = ( all => \@EXPORT_OK );
 
 my @UINT_TO_CONSONANT = (qw/ b d f g h j k l m n p r s t v z /);
@@ -43,9 +43,9 @@ sub _uint16_to_chunk {
     scalar reverse $out;
 }
 
-# uint32quint(0x7f000001) eq 'lusab-babad';
-sub uint32quint {
-    my $in  = shift // Carp::croak 'usage: uint32quint($INTEGER)';
+# uint32proquint(0x7f000001) eq 'lusab-babad';
+sub uint32proquint {
+    my $in  = shift // Carp::croak 'usage: uint32proquint($INTEGER)';
     my $sep = shift // $SEPARATOR;
 
     Carp::croak('input out of range 0-0xFFFFFFFF')
@@ -77,9 +77,9 @@ sub _chunk_to_uint16 {
     $res;
 }
 
-# quint32uint('lusab-babad') == 0x7f000001;
-sub quint32uint {
-    my $in  = shift // Carp::croak 'usage: quint32uint($QUINT)';
+# proquint32uint('lusab-babad') == 0x7f000001;
+sub proquint32uint {
+    my $in  = shift // Carp::croak 'usage: proquint32uint($QUINT)';
     my $sep = shift // $SEPARATOR;
 
     $in =~ s/$sep//g;
@@ -95,9 +95,9 @@ sub quint32uint {
     $out;
 }
 
-# hex2quint('7f00001') eq 'lusab-babad'
-sub hex2quint {
-    my $in  = shift // Carp::croak 'usage: hex2quint($HEXIDECIMAL)';
+# hex2proquint('7f00001') eq 'lusab-babad'
+sub hex2proquint {
+    my $in  = shift // Carp::croak 'usage: hex2proquint($HEXIDECIMAL)';
     my $sep = shift // $SEPARATOR;
 
     $in =~ s/^0[xX]//;
@@ -109,9 +109,9 @@ sub hex2quint {
         map { _uint16_to_chunk( hex( '0x' . $_ ) ) } $in =~ m/(.{4})/g );
 }
 
-# quint2hex('lusab-babad') eq '7f000001';
-sub quint2hex {
-    my $in  = shift // Carp::croak 'usage: quint2hex($QUINT)';
+# proquint2hex('lusab-babad') eq '7f000001';
+sub proquint2hex {
+    my $in  = shift // Carp::croak 'usage: proquint2hex($QUINT)';
     my $sep = shift // $SEPARATOR;
 
     $in =~ s/$sep//g;
@@ -140,11 +140,11 @@ Proquint - convert to and from proquint strings
 
     use Proquint ':all';
 
-    my $quint = uint32quint(0xCF000001);    # "lusab-babad"
-    my $int   = quint32uint($quint);        # 0xCF000001
+    my $quint = uint32proquint(0xCF000001);    # "lusab-babad"
+    my $int   = proquint32uint($quint);        # 0xCF000001
 
-    my $quint2 = hex2quint("dead1234beef"); # "tupot-damuh-ruroz"
-    my $hex    = quint2hex($quint2);        # "dead1234beef"
+    my $quint2 = hex2proquint("dead1234beef"); # "tupot-damuh-ruroz"
+    my $hex    = proquint2hex($quint2);        # "dead1234beef"
 
 =head1 DESCRIPTION
 

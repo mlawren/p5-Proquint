@@ -9,13 +9,13 @@ my $quint = 'lusab-babad';
 my $hex2   = 'dead1234beef';
 my $quint2 = 'tupot-damuh-ruroz';
 
-is uint32quint($int),   $quint, 'uint32quint ' . $int;
-is quint32uint($quint), $int,   'quint32uint ' . $quint;
+is uint32proquint($int),   $quint, 'uint32proquint ' . $int;
+is proquint32uint($quint), $int,   'proquint32uint ' . $quint;
 
-is hex2quint($hex),   $quint, 'hex2quint ' . $hex;
-is quint2hex($quint), $hex,   'quint2hex ' . $quint;
+is hex2proquint($hex),   $quint, 'hex2proquint ' . $hex;
+is proquint2hex($quint), $hex,   'proquint2hex ' . $quint;
 
-is hex2quint($hex2),   $quint2, 'hex2quint ' . $hex2;
-is quint2hex($quint2), $hex2,   'quint2hex ' . $quint2;
+is hex2proquint($hex2),   $quint2, 'hex2proquint ' . $hex2;
+is proquint2hex($quint2), $hex2,   'proquint2hex ' . $quint2;
 
 done_testing();
