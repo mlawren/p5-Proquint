@@ -23,7 +23,7 @@
       "build" : {
          "requires" : {
             "ExtUtils::MakeMaker" : "0",
-            "Test::More" : "0.88"
+            "Test2::V0" : "0"
          }
       },
       "configure" : {
@@ -48,5 +48,5 @@
          "url" : "https://github.com/mlawren/p5-Proquint"
       }
    },
-   "version" : "0.002"
+   "version" : "0.003"
 }

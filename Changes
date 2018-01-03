@@ -1,3 +1,8 @@
+0.003 (2018-01-03)
+
+    Packaging:
+        - Add missing Test2::V0 dependency
+
 0.002 (2018-01-03)
 
     API / Behaviour Changes:

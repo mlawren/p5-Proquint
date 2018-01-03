@@ -4,7 +4,7 @@ use warnings;
 use Carp ();
 use Exporter::Tiny;
 
-our $VERSION   = '0.002';
+our $VERSION   = '0.003';
 our @ISA       = 'Exporter::Tiny';
 our @EXPORT_OK = (qw/uint32proquint proquint32uint hex2proquint proquint2hex/);
 our @EXPORT_TAGS = ( all => \@EXPORT_OK );
@@ -134,7 +134,7 @@ Proquint - convert to and from proquint strings
 
 =head1 VERSION
 
-0.002 (2018-01-03)
+0.003 (2018-01-03)
 
 =head1 SYNOPSIS
 
