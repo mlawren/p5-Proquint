@@ -11,16 +11,16 @@ WriteMakefile(
     AUTHOR       => 'Mark Lawrence <nomad@null.net>',
     VERSION_FROM => 'lib/Proquint.pm',
     LICENSE      => 'gpl_3',
-    META_ADD     => {
-        resources => {
-            repository => 'https://github.com/mlawren/p5-Proquint',
-        }
+    META_MERGE   => {
+        'meta-spec' => { version => 2 },
+        resources   => {
+            repository => {
+                type => 'git',
+                web  => 'https://github.com/mlawren/p5-Proquint',
+                url  => 'ssh://git@github.com/mlawren/p5-Proquint.git'
+            }
+        },
     },
-#    META_MERGE => {
-#        no_index => {
-#            package => [qw(Proquint::Boolean)],
-#        },
-#    },
 );
 
 if ( -e '.git' ) {
