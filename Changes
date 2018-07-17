@@ -13,7 +13,8 @@
         - None.
 
     Dependencies:
-        - Depend on githook-perltidy for development
+        - Depend on githook-perltidy for development, and use it to
+          keep the README up to date.
 
     Packaging:
         - Use META-SPEC version 2 and add Github repository URLs.

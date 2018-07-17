@@ -22,11 +22,3 @@ WriteMakefile(
         },
     },
 );
-
-if ( -e '.git' ) {
-    my $parser = Pod::Text->new( sentence => 0 );
-
-    # Read POD from file.pod and write to file.txt.
-    $parser->parse_from_file( 'lib/Proquint.pm', 'README' );
-}
-
