@@ -10,6 +10,10 @@ on configure => sub {
     requires 'Pod::Text';
 };
 
+on develop => sub {
+    requires 'App::githook_perltidy' => '0.11.10';
+};
+
 on test => sub {
     requires 'Test2::V0';
 };

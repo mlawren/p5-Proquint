@@ -9,7 +9,7 @@ configure_requires:
   ExtUtils::MakeMaker::CPANfile: '0.08'
   Pod::Text: '0'
 dynamic_config: 0
-generated_by: 'ExtUtils::MakeMaker version 7.0402, CPAN::Meta::Converter version 2.150001'
+generated_by: 'ExtUtils::MakeMaker version 7.34, CPAN::Meta::Converter version 2.150010'
 license: gpl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -26,5 +26,6 @@ requires:
   strict: '0'
   warnings: '0'
 resources:
-  repository: https://github.com/mlawren/p5-Proquint
-version: '0.003'
+  repository: ssh://git@github.com/mlawren/p5-Proquint.git
+version: '0.004'
+x_serialization_backend: 'CPAN::Meta::YAML version 0.018'
