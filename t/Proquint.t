@@ -2,20 +2,36 @@
 use Test2::V0;
 use Proquint ':all';
 
-my $hex   = '7f000001';
-my $int   = hex( '0x' . $hex );
-my $quint = 'lusab-babad';
+use constant TYPE => 0;
+use constant SRC  => 1;
+use constant PQ   => 2;
 
-my $hex2   = 'dead1234beef';
-my $quint2 = 'tupot-damuh-ruroz';
+my @triplets = (
+    [ 'uint', hex('0x7f000001'), 'lusab-babad' ],
+    [ 'uint', hex('0xffffffff'), 'zuzuz-zuzuz' ],
+    [ 'hex',  'dead1234beef',    'tupot-damuh-ruroz' ],
+    [ 'hex',  'ffffffff',        'zuzuz-zuzuz' ],
+    [ 'hex',  '0000',            'babab' ],
+);
 
-is uint32proquint($int),   $quint, 'uint32proquint ' . $int;
-is proquint32uint($quint), $int,   'proquint32uint ' . $quint;
-
-is hex2proquint($hex),   $quint, 'hex2proquint ' . $hex;
-is proquint2hex($quint), $hex,   'proquint2hex ' . $quint;
-
-is hex2proquint($hex2),   $quint2, 'hex2proquint ' . $hex2;
-is proquint2hex($quint2), $hex2,   'proquint2hex ' . $quint2;
+foreach my $triplet (@triplets) {
+    subtest "@$triplet" => sub {
+        if ( $triplet->[TYPE] eq 'uint' ) {
+            is uint32proquint( $triplet->[SRC] ), $triplet->[PQ],
+              'uint32proquint ' . $triplet->[SRC];
+            is proquint32uint( $triplet->[PQ] ), $triplet->[SRC],
+              'proquint32uint ' . $triplet->[PQ];
+        }
+        elsif ( $triplet->[TYPE] eq 'hex' ) {
+            is hex2proquint( $triplet->[SRC] ), $triplet->[PQ],
+              'hex2proquint ' . $triplet->[SRC];
+            is proquint2hex( $triplet->[PQ] ), $triplet->[SRC],
+              'proquint2hex ' . $triplet->[PQ];
+        }
+        else {
+            bail_out( 'Invalid test type: ' . $triplet->[TYPE] );
+        }
+    }
+}
 
 done_testing();
