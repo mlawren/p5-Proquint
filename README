@@ -14,18 +14,19 @@ SYNOPSIS
         my $hex    = proquint2hex($quint2);        # "dead1234beef"
 
 DESCRIPTION
-    Proquints <https://arxiv.org/html/0901.4016> are readable, spellable,
-    and pronounceable identifiers. The Proquints module converts 32-bit
-    integers and hexadecimal strings to and from proquints.
+    Proquints <https://arxiv.org/html/0901.4016> are readable,
+    spellable, and pronounceable identifiers. The Proquints module
+    converts 32-bit integers and hexadecimal strings to and from
+    proquints.
 
 AUTHOR
     Mark Lawrence <nomad@null.net>
 
 COPYRIGHT AND LICENSE
-    Copyright 2018 Mark Lawrence <nomad@null.net>
+    Copyright 2018-2022 Mark Lawrence <nomad@null.net>
 
-    This program is free software; you can redistribute it and/or modify it
-    under the terms of the GNU General Public License as published by the
-    Free Software Foundation; either version 3 of the License, or (at your
-    option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
 
