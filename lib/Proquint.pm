@@ -43,17 +43,6 @@ sub _uint16_to_chunk {
     scalar reverse $out;
 }
 
-# uint32proquint(0x7f000001) eq 'lusab-babad';
-sub uint32proquint {
-    my $in  = shift // Carp::croak 'usage: uint32proquint($INTEGER)';
-    my $sep = shift // $SEPARATOR;
-
-    Carp::croak('input out of range 0-0xFFFFFFFF')
-      if $in < 0 or $in > 0xffffffff;
-
-    _uint16_to_chunk( $in >> 16 ) . $sep . _uint16_to_chunk($in);
-}
-
 sub _chunk_to_uint16 {
     my $in = shift // Carp::croak 'usage: _chunk_to_uint16($INTEGER)';
 
@@ -75,6 +64,17 @@ sub _chunk_to_uint16 {
     }
 
     $res;
+}
+
+# uint32proquint(0x7f000001) eq 'lusab-babad';
+sub uint32proquint {
+    my $in  = shift // Carp::croak 'usage: uint32proquint($INTEGER)';
+    my $sep = shift // $SEPARATOR;
+
+    Carp::croak('input out of range 0-0xFFFFFFFF')
+      if $in < 0 or $in > 0xffffffff;
+
+    _uint16_to_chunk( $in >> 16 ) . $sep . _uint16_to_chunk($in);
 }
 
 # proquint32uint('lusab-babad') == 0x7f000001;
