@@ -168,7 +168,7 @@ Proquint - convert to and from proquint strings
 
 =head1 VERSION
 
-1.0.0_1 (yyyy-mm-dd)
+1.0.0_1 (2022-01-14)
 
 =head1 SYNOPSIS
 
