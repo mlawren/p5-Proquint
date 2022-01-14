@@ -2,6 +2,7 @@
 requires 'Carp';
 requires 'Exporter::Tiny';
 requires 'perl', '5.010';
+requires Socket => '2.022';
 requires 'strict';
 requires 'warnings';
 

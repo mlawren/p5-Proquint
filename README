@@ -13,11 +13,14 @@ SYNOPSIS
         my $quint2 = hex2proquint("dead1234beef"); # "tupot-damuh-ruroz"
         my $hex    = proquint2hex($quint2);        # "dead1234beef"
 
+        my $quint3 = ip2proquint('127.0.0.1');     # "lusab-babad"
+        my $ip     = proquint2ip($quint3);         # "127.0.0.1"
+
 DESCRIPTION
     Proquints <https://arxiv.org/html/0901.4016> are readable,
     spellable, and pronounceable identifiers. The Proquints module
-    converts 32-bit integers and hexadecimal strings to and from
-    proquints.
+    converts 32-bit integers, hexadecimal strings, and IP addresses to
+    and from proquints.
 
 AUTHOR
     Mark Lawrence <nomad@null.net>
