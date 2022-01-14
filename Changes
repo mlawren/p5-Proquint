@@ -1,16 +1,7 @@
-0.004 (yyyy-mm-dd)
-
-    API / Behaviour Changes:
-        - None.
+1.0.0_1 (yyyy-mm-dd)
 
     New Features:
         - IP Address conversion
-
-    Enhancements:
-        - None.
-
-    Bug Fixes:
-        - None.
 
     Dependencies:
         - Depend on githook-perltidy for development, and use it to
