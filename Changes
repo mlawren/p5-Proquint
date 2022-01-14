@@ -1,3 +1,15 @@
+1.0.0_1 (2022-01-14)
+
+    New Features:
+        - IP Address conversion
+
+    Dependencies:
+        - Depend on githook-perltidy for development, and use it to
+          keep the README up to date.
+
+    Packaging:
+        - Use META-SPEC version 2 and add Github repository URLs.
+
 0.003 (2018-01-03)
 
     Packaging:

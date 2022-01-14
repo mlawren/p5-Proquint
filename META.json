@@ -4,13 +4,13 @@
       "Mark Lawrence <nomad@null.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 7.0402, CPAN::Meta::Converter version 2.150001",
+   "generated_by" : "ExtUtils::MakeMaker version 7.34, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "gpl_3"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
-      "version" : "2"
+      "version" : 2
    },
    "name" : "Proquint",
    "no_index" : {
@@ -22,13 +22,12 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "0",
-            "Test2::V0" : "0"
+            "ExtUtils::MakeMaker" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker::CPANfile" : "0.08",
+            "ExtUtils::MakeMaker::CPANfile" : "0.09",
             "Pod::Text" : "0"
          }
       },
@@ -36,17 +35,26 @@
          "requires" : {
             "Carp" : "0",
             "Exporter::Tiny" : "0",
+            "Socket" : "2.022",
             "perl" : "5.010",
             "strict" : "0",
             "warnings" : "0"
          }
+      },
+      "test" : {
+         "requires" : {
+            "Test2::V0" : "0"
+         }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "unstable",
    "resources" : {
       "repository" : {
-         "url" : "https://github.com/mlawren/p5-Proquint"
+         "type" : "git",
+         "url" : "ssh://git@github.com/mlawren/p5-Proquint.git",
+         "web" : "https://github.com/mlawren/p5-Proquint"
       }
    },
-   "version" : "0.003"
+   "version" : "v1.0.0_1",
+   "x_serialization_backend" : "JSON::PP version 4.02"
 }

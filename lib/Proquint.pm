@@ -3,10 +3,17 @@ use strict;
 use warnings;
 use Carp ();
 use Exporter::Tiny;
+use Socket (qw/inet_pton inet_ntop AF_INET AF_INET6/);
 
-our $VERSION   = '0.003';
+our $VERSION   = '1.0.0_1';
 our @ISA       = 'Exporter::Tiny';
-our @EXPORT_OK = (qw/uint32proquint proquint32uint hex2proquint proquint2hex/);
+our @EXPORT_OK = (
+    qw/
+      uint32proquint proquint32uint
+      hex2proquint proquint2hex
+      ip2proquint proquint2ip
+      /
+);
 our @EXPORT_TAGS = ( all => \@EXPORT_OK );
 
 my @UINT_TO_CONSONANT = (qw/ b d f g h j k l m n p r s t v z /);
@@ -43,17 +50,6 @@ sub _uint16_to_chunk {
     scalar reverse $out;
 }
 
-# uint32proquint(0x7f000001) eq 'lusab-babad';
-sub uint32proquint {
-    my $in  = shift // Carp::croak 'usage: uint32proquint($INTEGER)';
-    my $sep = shift // $SEPARATOR;
-
-    Carp::croak('input out of range 0-0xFFFFFFFF')
-      if $in < 0 or $in > 0xffffffff;
-
-    _uint16_to_chunk( $in >> 16 ) . $sep . _uint16_to_chunk($in);
-}
-
 sub _chunk_to_uint16 {
     my $in = shift // Carp::croak 'usage: _chunk_to_uint16($INTEGER)';
 
@@ -75,6 +71,17 @@ sub _chunk_to_uint16 {
     }
 
     $res;
+}
+
+# uint32proquint(0x7f000001) eq 'lusab-babad';
+sub uint32proquint {
+    my $in  = shift // Carp::croak 'usage: uint32proquint($INTEGER)';
+    my $sep = shift // $SEPARATOR;
+
+    Carp::croak('input out of range 0-0xFFFFFFFF')
+      if $in < 0 or $in > 0xffffffff;
+
+    _uint16_to_chunk( $in >> 16 ) . $sep . _uint16_to_chunk($in);
 }
 
 # proquint32uint('lusab-babad') == 0x7f000001;
@@ -124,6 +131,33 @@ sub proquint2hex {
     join( '', map { sprintf( '%04x', _chunk_to_uint16($_) ) } @chunks );
 }
 
+# ip2proquint('127.0.0.1') eq 'lusab-babad'
+sub ip2proquint {
+    my $in  = shift // Carp::croak 'usage: ip2proquint($ADDRESS)';
+    my $sep = shift // $SEPARATOR;
+
+    my $ip = inet_pton( AF_INET6, $in ) // inet_pton( AF_INET, $in )
+      // Carp::croak sprintf q{invalid IP address '%s'}, $in;
+
+    join( $sep, map { _uint16_to_chunk($_) } unpack 'n*', $ip );
+}
+
+# proquint2ip('lusab-babad') eq '127.0.0.1'
+sub proquint2ip {
+    my $in  = shift // Carp::croak 'usage: proquint2ip($ADDRESS)';
+    my $sep = shift // $SEPARATOR;
+
+    $in =~ s/$sep//g;
+    Carp::croak 'invalid quint: ' . $in
+      unless not length($in) % $CHARS_PER_CHUNK;
+
+    my @chunks = $in =~ m/(.{$CHARS_PER_CHUNK})/g;
+    Carp::croak 'invalid quint: ' . $in unless @chunks;
+
+    my $ip = pack 'n*', map { _chunk_to_uint16($_) } @chunks;
+    return inet_ntop( 2 == @chunks ? AF_INET : AF_INET6, $ip );
+}
+
 1;
 
 __END__
@@ -134,7 +168,7 @@ Proquint - convert to and from proquint strings
 
 =head1 VERSION
 
-0.003 (2018-01-03)
+1.0.0_1 (2022-01-14)
 
 =head1 SYNOPSIS
 
@@ -146,11 +180,14 @@ Proquint - convert to and from proquint strings
     my $quint2 = hex2proquint("dead1234beef"); # "tupot-damuh-ruroz"
     my $hex    = proquint2hex($quint2);        # "dead1234beef"
 
+    my $quint3 = ip2proquint('127.0.0.1');     # "lusab-babad"
+    my $ip     = proquint2ip($quint3);         # "127.0.0.1"
+
 =head1 DESCRIPTION
 
 L<Proquints|https://arxiv.org/html/0901.4016> are readable, spellable,
 and pronounceable identifiers. The B<Proquints> module converts 32-bit
-integers and hexadecimal strings to and from proquints.
+integers, hexadecimal strings, and IP addresses to and from proquints.
 
 =head1 AUTHOR
 
@@ -158,7 +195,7 @@ Mark Lawrence E<lt>nomad@null.netE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2018 Mark Lawrence <nomad@null.net>
+Copyright 2018-2022 Mark Lawrence <nomad@null.net>
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
