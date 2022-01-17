@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use 5.010;
 use ExtUtils::MakeMaker::CPANfile;
-use Pod::Text;
 
 WriteMakefile(
     NAME         => 'Proquint',

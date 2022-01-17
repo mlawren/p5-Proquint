@@ -4,7 +4,7 @@
       "Mark Lawrence <nomad@null.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 7.34, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "ExtUtils::MakeMaker version 7.64, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "gpl_3"
    ],
@@ -27,8 +27,7 @@
       },
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker::CPANfile" : "0.09",
-            "Pod::Text" : "0"
+            "ExtUtils::MakeMaker::CPANfile" : "0.09"
          }
       },
       "runtime" : {
@@ -36,7 +35,7 @@
             "Carp" : "0",
             "Exporter::Tiny" : "0",
             "Socket" : "2.022",
-            "perl" : "5.010",
+            "perl" : "v5.13.2",
             "strict" : "0",
             "warnings" : "0"
          }
@@ -55,6 +54,6 @@
          "web" : "https://github.com/mlawren/p5-Proquint"
       }
    },
-   "version" : "v1.0.0_1",
+   "version" : "v1.0.0_2",
    "x_serialization_backend" : "JSON::PP version 4.02"
 }

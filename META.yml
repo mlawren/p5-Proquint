@@ -7,9 +7,8 @@ build_requires:
   Test2::V0: '0'
 configure_requires:
   ExtUtils::MakeMaker::CPANfile: '0.09'
-  Pod::Text: '0'
 dynamic_config: 0
-generated_by: 'ExtUtils::MakeMaker version 7.34, CPAN::Meta::Converter version 2.150010'
+generated_by: 'ExtUtils::MakeMaker version 7.64, CPAN::Meta::Converter version 2.150010'
 license: gpl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -23,10 +22,10 @@ requires:
   Carp: '0'
   Exporter::Tiny: '0'
   Socket: '2.022'
-  perl: '5.010'
+  perl: v5.13.2
   strict: '0'
   warnings: '0'
 resources:
   repository: ssh://git@github.com/mlawren/p5-Proquint.git
-version: v1.0.0_1
+version: v1.0.0_2
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'
