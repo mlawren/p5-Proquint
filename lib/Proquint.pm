@@ -5,7 +5,7 @@ use Carp ();
 use Exporter::Tiny;
 use Socket (qw/inet_pton inet_ntop AF_INET AF_INET6/);
 
-our $VERSION   = '1.0.0_2';
+our $VERSION   = '1.0.0_3';
 our @ISA       = 'Exporter::Tiny';
 our @EXPORT_OK = (
     qw/
@@ -168,7 +168,7 @@ Proquint - convert to and from proquint strings
 
 =head1 VERSION
 
-1.0.0_2 (2022-01-17)
+1.0.0_3 (yyyy-mm-dd)
 
 =head1 SYNOPSIS
 
